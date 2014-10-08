@@ -235,6 +235,24 @@ def initConfig(controller):
              "NEED_CONFIRM": False,
              "CONDITION": False},
 
+            {"CMD_OPTION": "os-trove-install",
+             "USAGE": (
+                "Set to 'y' if you would like Packstack to install "
+                "OpenStack Database (Trove)"
+             ),
+             "PROMPT": (
+                "Should Packstack install OpenStack Database (Trove)"
+             ),
+             "OPTION_LIST": ["y", "n"],
+             "VALIDATORS": [validators.validate_options],
+             "DEFAULT_VALUE": "n",
+             "MASK_INPUT": False,
+             "LOOSE_VALIDATION": False,
+             "CONF_NAME": "CONFIG_TROVE_INSTALL",
+             "USE_DEFAULT": False,
+             "NEED_CONFIRM": False,
+             "CONDITION": False},
+
             {"CMD_OPTION": "os-client-install",
              "USAGE": (
                 "Set to 'y' if you would like Packstack to install "
@@ -520,6 +538,23 @@ def initConfig(controller):
                 "such as Glance and Cinder."
              ),
              "PROMPT": "Enter the IP address of the storage host",
+             "OPTION_LIST": [],
+             "VALIDATORS": [validators.validate_ip,
+                            validators.validate_ssh],
+             "DEFAULT_VALUE": utils.get_localhost_ip(),
+             "MASK_INPUT": False,
+             "LOOSE_VALIDATION": False,
+             "USE_DEFAULT": False,
+             "NEED_CONFIRM": False,
+             "CONDITION": False},
+
+            {"CONF_NAME": "CONFIG_TROVE_HOST",
+             "CMD_OPTION": "os-trove-host",
+             "USAGE": (
+                "(Unsupported!) The IP address of the server on which "
+                "to install OpenStack services specific to Trove"
+             ),
+             "PROMPT": "Enter the IP address of the Trove host",
              "OPTION_LIST": [],
              "VALIDATORS": [validators.validate_ip,
                             validators.validate_ssh],
